@@ -1,6 +1,7 @@
 from flask import Flask,request,jsonify
 import numpy as np
 import pickle
+from waitress import serve
 
 model_treatment = pickle.load(open('decision_tree_model_treatment','rb'))
 model_diagnosis = pickle.load(open('decision_tree_model_diagnosis','rb'))
@@ -33,4 +34,5 @@ def predict():
 
 if __name__ == '__main__':
     #app.run(debug=True)
-    app.run(debug=False, host='0.0.0.0')
+    serve(app, host='0.0.0.0', port=5000)
+
